@@ -1,0 +1,19 @@
+model: lstm
+
+data_path: datasets
+
+class_labels: ["neutral", "calm", "happy", "sad", "angry", "fearful","crying"]
+
+feature_folder: features/ravdess/librosa/
+feature_method: l
+
+checkpoint_path: checkpoints/
+checkpoint_name: LSTM_LIBROSA_RAVDESS
+
+epochs: 20
+batch_size: 8
+lr: 0.001
+
+rnn_size: 128
+hidden_size: 32
+dropout: 0.5

@@ -1,0 +1,15 @@
+model: svm
+# Dataset
+data_path: datasets
+class_labels: ["neutral", "calm", "happy", "sad", "angry", "fearful","crying"] 
+# Feature Extraction
+feature_method: l   # use librosa
+feature_folder: features/ravdess/librosa_svm/
+# Checkpoints
+checkpoint_path: checkpoints/
+checkpoint_name: SVM_LIBROSA_RAVDESS
+# SVM Parameters
+params:
+  kernel: rbf
+  probability: True
+  gamma: auto

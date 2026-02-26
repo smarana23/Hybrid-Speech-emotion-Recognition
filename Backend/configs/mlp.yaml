@@ -1,0 +1,14 @@
+model: mlp
+# Dataset
+data_path: datasets
+class_labels: ["neutral", "calm", "happy", "sad", "angry", "fearful","crying"]
+# Feature Extraction
+feature_method: l   # use librosa
+feature_folder: features/ravdess/librosa_mlp/
+# Checkpoints
+checkpoint_path: checkpoints/
+checkpoint_name: MLP_LIBROSA_RAVDESS
+# MLP Parameters
+params:
+  alpha: 0.001
+  max_iter: 500

@@ -1,0 +1,42 @@
+model: cnn1d
+
+# ================================
+# Dataset
+# ================================
+data_path: datasets
+
+class_labels:
+  - angry
+  - calm
+  - happy
+  - sad
+  - neutral
+  - fearful
+  - crying
+
+# ================================
+# Feature Extraction
+# ================================
+feature_method: l
+feature_folder: features/ravdess/librosa_cnn/
+
+# ================================
+# Checkpoints
+# ================================
+checkpoint_path: checkpoints/
+checkpoint_name: CNN1D_LIBROSA_RAVDESS
+
+# ================================
+# Training
+# ================================
+epochs: 15
+batch_size: 16
+lr: 0.001
+
+# ================================
+# CNN Parameters
+# ================================
+n_kernels: 32
+kernel_sizes: [5, 5]
+dropout: 0.5
+hidden_size: 32

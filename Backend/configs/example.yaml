@@ -1,0 +1,38 @@
+# ================================
+# Model
+# ================================
+model: lstm
+
+# ================================
+# Dataset
+# ================================
+data_path: datasets
+
+class_labels:
+  - angry
+  - happy
+  - sad
+  - neutral
+
+# ================================
+# Feature Extraction
+# ================================
+feature_method: l   # l = librosa
+feature_folder: features/ravdess/librosa/
+
+# ================================
+# Training
+# ================================
+epochs: 20
+batch_size: 16
+lr: 0.001
+
+rnn_size: 128
+hidden_size: 128
+dropout: 0.3
+
+# ================================
+# Checkpoints
+# ================================
+checkpoint_path: checkpoints/
+checkpoint_name: LSTM_LIBROSA_RAVDESS
