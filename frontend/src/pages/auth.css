@@ -1,0 +1,91 @@
+/* 🌈 Full page background */
+.auth-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #272757, #505081, #8686ac);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 🧊 Card */
+.auth-box {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  width: 350px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+}
+
+/* 🔥 Heading */
+.auth-box h2 {
+  margin-bottom: 20px;
+  color: #272757;
+}
+
+/* ✏️ Inputs */
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: 0.3s;
+}
+
+/* ✨ Focus */
+.auth-box input:focus {
+  border-color: #505081;
+  box-shadow: 0 0 5px rgba(80,80,129,0.5);
+}
+
+/* 🚀 Button */
+.auth-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: #505081;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* 🔥 Hover */
+.auth-box button:hover {
+  background: #272757;
+  transform: scale(1.03);
+}
+
+/* 🔗 Text */
+.auth-box p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.auth-box span {
+  color: #505081;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.auth-box span:hover {
+  text-decoration: underline;
+}
+
+/* ✨ Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

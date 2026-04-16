@@ -36,7 +36,7 @@ useEffect(() => {
     "Training neural network...",
     "Analyzing emotion...",
     "Classifying Speech Signals..",
-    "Predicting Emotion...."
+    "Predicting Emotion..."
   ];
 
   let index = 0;
@@ -123,8 +123,27 @@ setProbabilities(null);
       setEmotion(data.emotion);
       const probs = data.probability || data.probabilities;
       setProbabilities(probs);
+  
+      const base64Audio = await blobToBase64(audioBlob);
+      const user = JSON.parse(localStorage.getItem("user"));
+      console.log("Saving history for user:", user?.id);
+
+if (!user || !user.id) {
+  alert("User not logged in properly");
+  return;
+}
+await fetch("https://hybrid-ser-backend.onrender.com/api/history/add", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    userId: user.id,
+    emotion: data.emotion,
+    audioUrl: base64Audio, // or base64 if needed
+  }),
+});
       // Create history record
- const base64Audio = await blobToBase64(audioBlob);
 
 const newRecord = {
   audio: base64Audio,

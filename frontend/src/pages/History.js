@@ -5,13 +5,46 @@ import "./History.css";
 function History() {
   const [history, setHistory] = useState([]);
 
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("emotion_history")) || [];
-    setHistory(stored);
-  }, []);
+useEffect(() => {
+  const fetchHistory = async () => {
+    try {
+     const user = JSON.parse(localStorage.getItem("user"));
+
+if (!user || !user.id) {
+  console.log("No user found");
+  return;
+}
+
+      const res = await fetch(
+        `https://hybrid-ser-backend.onrender.com/api/history/${user.id}`
+      );
+
+      const data = await res.json();
+      console.log("Fetched history:", data);
+
+      // ⚠️ map backend data → your UI format
+      const formatted = data.map(item => ({
+        emotion: item.emotion,
+        audio: item.audioUrl,   // match your existing UI
+        timestamp: new Date(item.date).toLocaleString(),
+        probabilities: {} // optional (you can improve later)
+      }));
+
+      if (!data || data.length === 0) {
+  setHistory([]);
+} else {
+  setHistory(formatted);
+}
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  fetchHistory();
+}, []);
 
   const clearHistory = () => {
-    localStorage.removeItem("emotion_history");
+    // localStorage.removeItem("emotion_history");
     setHistory([]);
   };
 
