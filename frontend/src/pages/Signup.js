@@ -17,7 +17,7 @@ function Signup() {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/auth/signup",
+       "https://hybrid-speech-emotion-recognition.onrender.com/api/auth/signup",
         form
       );
 

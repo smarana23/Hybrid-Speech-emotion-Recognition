@@ -10,13 +10,23 @@ useEffect(() => {
     try {
      const user = JSON.parse(localStorage.getItem("user"));
 
-if (!user || !user.id) {
-  console.log("No user found");
+// if (!user || !user.id) {
+//   console.log("No user found");
+//   return;
+// }
+console.log("User from localStorage:", user);
+
+if (!user) {
+  console.log("User is NULL ❌");
   return;
 }
 
+if (!user.id) {
+  console.log("User ID missing ❌", user);
+  return;
+}
       const res = await fetch(
-        `https://hybrid-ser-backend.onrender.com/api/history/${user.id}`
+       `https://hybrid-speech-emotion-recognition.onrender.com/api/history/${user.id}`
       );
 
       const data = await res.json();

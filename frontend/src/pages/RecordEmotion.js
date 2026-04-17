@@ -113,7 +113,7 @@ setProbabilities(null);
     formData.append("file", audioBlob, "recording.webm");
     try {
       const response = await fetch(
-        "https://hybrid-ser-backend.onrender.com/predict",
+        "https://hybrid-speech-emotion-recognition-python.onrender.com/predict",
         {
           method: "POST",
           body: formData,
@@ -127,12 +127,27 @@ setProbabilities(null);
       const base64Audio = await blobToBase64(audioBlob);
       const user = JSON.parse(localStorage.getItem("user"));
       console.log("Saving history for user:", user?.id);
+      console.log(data);
+      const resHistory = await fetch("https://hybrid-speech-emotion-recognition.onrender.com/api/history/add", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    userId: user.id,
+    emotion: data.emotion,
+    audioUrl: base64Audio,
+  }),
+});
+
+const result = await resHistory.json();
+console.log("History save response:", result);
 
 if (!user || !user.id) {
   alert("User not logged in properly");
   return;
 }
-await fetch("https://hybrid-ser-backend.onrender.com/api/history/add", {
+await fetch("https://hybrid-speech-emotion-recognition.onrender.com/api/history/add", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -162,6 +177,7 @@ localStorage.setItem(
   JSON.stringify(existingHistory.slice(0, 20))
 );
     } catch (error) {
+      console.log("ERROR:", error);
       alert("Server error. Please try again.");
     }
     setIsLoading(false);
@@ -179,14 +195,14 @@ localStorage.setItem(
       )}
 {isRecording && (
   <div style={{ marginTop: "10px" }}>
-    <button disable className = "recording">
+    <button disabled className = "recording">
       🔴 Recording...
     </button>
 
     <br />
     <br />
 
-    <button onClick={stopRecording} classname = "stop">
+    <button onClick={stopRecording} className = "stop">
       Stop Recording
     </button>
   </div>

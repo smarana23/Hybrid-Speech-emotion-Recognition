@@ -7,10 +7,12 @@ import predict
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
-
+import warnings
+warnings.filterwarnings("ignore")
+from pydub import AudioSegment 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins="*")
 sys.argv = ["app.py", "--config", "configs/lstm.yaml"]
 config = utils.parse_opt()
 @app.route('/predict', methods=['POST'])
@@ -24,14 +26,18 @@ def predict_route():
     os.makedirs("recordings", exist_ok=True)
 
     timestamp = int(time.time())
-    audio_path = f"recordings/audio_{timestamp}.wav"
+    # ✅ Step 1: Save as webm
+    webm_path = f"recordings/audio_{timestamp}.webm"
+    file.save(webm_path)
 
-    file.save(audio_path)
+# ✅ Step 2: Convert to wav
+    wav_path = f"recordings/audio_{timestamp}.wav"
 
-  
-    
+    audio = AudioSegment.from_file(webm_path, format="webm")
+    audio.export(wav_path, format="wav")
 
-    emotion, prob = predict.predict_emotion(config, audio_path)
+# ✅ Step 3: Use wav for prediction
+    emotion, prob = predict.predict_emotion(config, wav_path)
 
     return jsonify({
         "emotion": emotion,
