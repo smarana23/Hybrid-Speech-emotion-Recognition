@@ -29,7 +29,7 @@
 
 import { HashRouter, Routes, Route } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import RecordEmotion from "./pages/RecordEmotion";
 import Dashboard from "./pages/Dashboard";
@@ -38,6 +38,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Layout from "./Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { Toaster } from "react-hot-toast";
 
 import { EmotionProvider } from "./context/EmotionContext";
 
@@ -49,6 +50,10 @@ function App() {
       <HashRouter>
 
         {/* ✅ Navbar only AFTER login */}
+          <Toaster 
+          position="top-right"
+          reverseOrder={false}
+        />
         
 
         <Routes>

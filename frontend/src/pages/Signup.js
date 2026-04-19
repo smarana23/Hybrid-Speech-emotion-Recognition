@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import "./auth.css";
 
 function Signup() {
@@ -17,15 +18,15 @@ function Signup() {
 
     try {
       await axios.post(
-       "https://hybrid-speech-emotion-recognition.onrender.com/api/auth/signup",
+        "https://hybrid-speech-emotion-recognition.onrender.com/api/auth/signup",
         form
       );
 
-      alert("Signup successful!");
+      toast.success("Signup successful 🎉");
       navigate("/login");
 
     } catch (err) {
-      alert("Signup failed");
+      toast.error("Signup failed ❌");
     }
   };
 

@@ -16,7 +16,8 @@ const historyRoutes = require("./routes/history");
 app.use("/api/history", historyRoutes);
 
 // 🔗 MongoDB Connection
-mongoose.connect("mongodb+srv://smaranavollala_db_user:Smarana%4023@externalcluster.ol702v5.mongodb.net/ser_project")
+// mongoose.connect("mongodb+srv://smaranavollala_db_user:Smarana%4023@externalcluster.ol702v5.mongodb.net/ser_project")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("✅ MongoDB Connected Successfully");
   })
@@ -30,6 +31,8 @@ app.get("/", (req, res) => {
 });
 
 // Start server
-app.listen(5000, () => {
-  console.log("🔥 Server running on http://localhost:5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`🔥 Server running on port ${PORT}`);
 });

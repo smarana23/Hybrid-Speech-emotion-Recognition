@@ -11,12 +11,13 @@ router.get("/test", (req, res) => {
 
 // ✅ ADD HISTORY
 router.post("/add", async (req, res) => {
-  const { userId, emotion, audioUrl } = req.body;
+  const { userId, emotion, probabilities } = req.body;
 console.log("Incoming Data:", req.body);
   try {
     await User.findByIdAndUpdate(userId, {
       $push: {
-        history: { emotion, audioUrl }
+        // history: { emotion, audioUrl }
+        history: { emotion, probabilities , audioUrl}
       }
     });
 

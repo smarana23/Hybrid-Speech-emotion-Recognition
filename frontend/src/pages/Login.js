@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import "./auth.css";
 
 function Login() {
@@ -16,18 +17,17 @@ function Login() {
 
     try {
       const res = await axios.post(
-       "https://hybrid-speech-emotion-recognition.onrender.com/api/auth/login",
+        "https://hybrid-speech-emotion-recognition.onrender.com/api/auth/login",
         form
       );
-          console.log("Login response:", res.data);
 
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      alert("Login successful!");
+      toast.success("Login successful 🎉");
       navigate("/home");
 
     } catch (err) {
-      alert("Invalid credentials");
+      toast.error("Invalid credentials ❌");
     }
   };
 

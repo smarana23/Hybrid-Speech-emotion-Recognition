@@ -1,7 +1,9 @@
 node_modules/
 Backend/node_server/node_modules/
+
 recordings/
 Backend/python_model/recordings/
+
 *.wav
 datasets/
 # checkpoints/
